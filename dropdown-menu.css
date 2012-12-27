@@ -82,7 +82,7 @@
 }
 
 /* Optional submenu arrows -- uses image replacement */
-.dropdown-menu-sub-indicator {
+span.dropdown-menu-sub-indicator {
     position: relative;
     left: 5px;
     margin-right: 5px;
@@ -93,30 +93,30 @@
     background-color: transparent;
     border: 0;
     overflow: hidden;
-    background-image: url('arrows-000000.png'); /* 8-bit indexed alpha png. IE6 gets solid image only */
+    background-image: url('arrows-000000.png');
     background-repeat: no-repeat;
     background-position: 0 -100px;
     /* IE 6/7 hacks */
     *text-indent: -9999px;
     *vertical-align: middle;
 }
-.dropdown-menu-sub-indicator:before {
+span.dropdown-menu-sub-indicator:before {
     content: "";
     display: block;
     width: 0;
     height: 100%;
 }
 /* Arrow hovers */
-.dropdown-menu li:hover > a > .dropdown-menu-sub-indicator,
-.dropdown-menu li.dropdown-menu-hover > a > .dropdown-menu-sub-indicator {
+.dropdown-menu li:hover > a > span.dropdown-menu-sub-indicator,
+.dropdown-menu li.dropdown-menu-hover > a > span.dropdown-menu-sub-indicator {
     background-position: -10px -100px;
 }
 /* Point arrows to the right for anchors in subs */
-.dropdown-menu ul .dropdown-menu-sub-indicator {
+.dropdown-menu ul span.dropdown-menu-sub-indicator {
     background-position: 0 0;
 }
-.dropdown-menu ul li:hover > a > .dropdown-menu-sub-indicator,
-.dropdown-menu ul li.dropdown-menu-hover > a > .dropdown-menu-sub-indicator {
+.dropdown-menu ul li:hover > a > span.dropdown-menu-sub-indicator,
+.dropdown-menu ul li.dropdown-menu-hover > a > span.dropdown-menu-sub-indicator {
     background-position: -10px 0;
 }
 
@@ -133,10 +133,10 @@
     float: left;
     zoom: 1;
 }
-.dropdown-menu-vertical .dropdown-menu-sub-indicator {
+.dropdown-menu-vertical span.dropdown-menu-sub-indicator {
     background-position: 0 0;
 }
-.dropdown-menu-vertical li:hover > a > .dropdown-menu-sub-indicator,
-.dropdown-menu-vertical li.dropdown-menu-hover > a > .dropdown-menu-sub-indicator {
+.dropdown-menu-vertical li:hover > a > span.dropdown-menu-sub-indicator,
+.dropdown-menu-vertical li.dropdown-menu-hover > a > span.dropdown-menu-sub-indicator {
     background-position: -10px 0; /* arrow hovers for modern browsers*/
 }

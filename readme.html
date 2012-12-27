@@ -15,11 +15,17 @@
 <script type="text/javascript" src="dropdown-menu.js"></script>
 
 <style type="text/css">
+/* Styles specific to this page */
 body {font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Helvetica,sans-serif;font-size:.9em;padding-bottom:300px;}
 a, a:visited {color:#e00;}
+a:hover {color:#f00;}
 code {color:#2821FF;font-family:"Lucida Console",monospace;}
 .example {margin-bottom:20px;}
+ul {margin-left:35px;padding:0;}
+#download ul {list-style: none;margin:0;padding:0;}
+#download ul ul {list-style: disc;margin-left:35px;margin-top:10px;}
 
+/* Menu styles */
 #example4 .dropdown-menu {
     width: 260px;
     float: none;
@@ -28,7 +34,11 @@ code {color:#2821FF;font-family:"Lucida Console",monospace;}
 
 <script type="text/javascript">
 $(function() {
-    $('#example1 .dropdown-menu').dropdown_menu();
+    $('#example1 .dropdown-menu').dropdown_menu({
+        sub_indicators : true,
+        drop_shadows : true,
+        close_delay : 500
+    });
     $('#example2 .dropdown-menu').dropdown_menu({
         sub_indicator_class  : 'dropdown-menu-sub-indicator',
         vertical_class       : 'dropdown-menu-vertical',
@@ -47,11 +57,6 @@ $(function() {
         drop_shadows : true,
         vertical : true
     });
-    $('#example5 .dropdown-menu').dropdown_menu({
-        sub_indicators : true,
-        drop_shadows : true,
-        close_delay : 500
-    });
 });
 </script>
 </head>
@@ -59,6 +64,25 @@ $(function() {
 <body>
 
 <h1>Barebones, Simple, Styleable jQuery + CSS Dropdown Menu</h1>
+
+<div id="download">
+
+    <h2>Download</h2>
+
+    <ul>
+        <li>
+            <big><a href="">dropdown-menu.zip (kb)</a></big>
+            <ul>
+                <li><a href="">arrows-000000.png</a></li>
+                <li><a href="">arrows-ffffff.png</a></li>
+                <li><a href="">dropdown-menu-skin.css</a></li>
+                <li><a href="">dropdown-menu.css</a></li>
+                <li><a href="">dropdown-menu.js</a></li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
 
 <h2>Features</h2>
 
@@ -105,17 +129,26 @@ $(function() {
 
 <div class="example" id="example1">
 
-    <h3>Example 1 - Default Configuration</h3>
+    <h3>Example 1 - Custom CSS3 Skin and Increased Menu Close Delay</h3>
 
     <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
 
-<pre style="display:none;"><code>&lt;script type="text/javascript"&gt;
-$(function() {
-    $('#example1 .dropdown-menu').dropdown_menu();
-});
-&lt;/script&gt;</code></pre>
+<pre style="display:none;"><code>&lt;link rel="stylesheet" href="dropdown-menu-skin.css" /&gt;
 
-    <ul class="dropdown-menu">
+&lt;script type="text/javascript"&gt;
+$(function() {
+    $('#example5 .dropdown-menu').dropdown_menu({
+        sub_indicators : true,
+        drop_shadows : true,
+        close_delay : 500
+    });});
+&lt;/script&gt;
+
+&lt;ul class="dropdown-menu dropdown-menu-skin"&gt;
+[...]
+&lt;/ul&gt;</code></pre>
+
+    <ul class="dropdown-menu dropdown-menu-skin">
         <li><a href="#" onclick="return false;">Lorem Ipsum Dolor Sit</a></li>
         <li>
             <a href="#" onclick="return false;">Menu Item With Submenu</a>
@@ -173,7 +206,7 @@ $(function() {
 <pre style="display:none;"><code>&lt;script type="text/javascript"&gt;
 $(function() {
     $('#example2 .dropdown-menu').dropdown_menu({
-        sub_indicator_class  : 'dropdown-menu-sub-indicator',   // Class to specify arrows for submenus
+        sub_indicator_class  : 'dropdown-menu-sub-indicator',   // Class given to LI's with submenus
         vertical_class       : 'dropdown-menu-vertical',        // Class for a vertical menu
         shadow_class         : 'dropdown-menu-shadow',          // Class for drop shadow on submenus
         hover_class          : 'dropdown-menu-hover',           // Class applied to hovered LI's
@@ -239,6 +272,8 @@ $(function() {
 <div class="example" id="example3">
 
     <h3>Example 3 - Specify Options With HTML5 Data Attribute</h3>
+
+    <p>You can use JSON data in a <code>data-options</code> attribute of the <code>UL</code>. Requires a specific single/double quote precedence.</p>
 
     <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
 
@@ -374,76 +409,13 @@ $(function() {
 
 </div>
 
-<div class="example" id="example5">
+<h2>Acknowledgements</h2>
 
-    <h3>Example 5 - Custom CSS3 Skin and Increased Menu Close Delay</h3>
-
-    <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
-
-<pre style="display:none;"><code>&lt;link rel="stylesheet" href="dropdown-menu-skin.css" /&gt;
-
-&lt;script type="text/javascript"&gt;
-$(function() {
-    $('#example5 .dropdown-menu').dropdown_menu({
-        sub_indicators : true,
-        drop_shadows : true,
-        close_delay : 500
-    });});
-&lt;/script&gt;
-
-&lt;ul class="dropdown-menu dropdown-menu-skin"&gt;
-[...]
-&lt;/ul&gt;</code></pre>
-
-    <ul class="dropdown-menu dropdown-menu-skin">
-        <li><a href="#" onclick="return false;">Lorem Ipsum Dolor Sit</a></li>
-        <li>
-            <a href="#" onclick="return false;">Menu Item With Submenu</a>
-            <ul>
-                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
-                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
-                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
-                <li>
-                    <a href="#" onclick="return false;">Submenu Item with Submenu</a>
-                    <ul>
-                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
-                        <li>
-                            <a href="#" onclick="return false;">Submenu Item with Submenu</a>
-                            <ul>
-                                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
-                                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
-                                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
-            </ul>
-        </li>
-        <li><a href="#" onclick="return false;">Voluptate Velit Esse</a></li>
-        <li>
-            <a href="#" onclick="return false;">Another Item with Submenu</a>
-            <ul>
-                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
-                <li>
-                    <a href="#" onclick="return false;">Submenu Item With Submenu</a>
-                    <ul>
-                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
-                        <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
-                        <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
-                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" onclick="return false;">Officia Deserunt Mollit</a></li>
-                <li><a href="#" onclick="return false;">Eu Fugiat Nulla</a></li>
-            </ul>
-        </li>
-        <li><a href="#" onclick="return false;">Occaecat Cupidatat</a></li>
-    </ul>
-
-</div>
-
+<p>
+    By Daniel Upshaw. This script was inspired by the classic jQuery menu plugin <a href="http://users.tpg.com.au/j_birch/plugins/superfish/">Superfish</a>,
+    which was inspired by <a href="http://alistapart.com/">ALA</a>'s <a href="http://alistapart.com/articles/dropdowns">Suckerfish</a>.
+    Functionality from Brandon Aaron's <a href="http://brandonaaron.net/code/bgiframe/docs">bgiframe</a> plugin is integrated to accomodate for IE7 quirks.
+</p>
 
 </body>
 </html>

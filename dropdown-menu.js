@@ -67,6 +67,8 @@
                         }, this), o.close_delay));
                     }
                 }).each(function() {
+                    // Add a class to the LI to indicate that it has a submenu
+                    $(this).addClass(o.sub_indicator_class);
                     // Add sub indicators if enabled
                     if (o.sub_indicators) {
                         $('>a:first-child', this).append(sub_indicator.clone());
