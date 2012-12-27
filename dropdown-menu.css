@@ -1,0 +1,142 @@
+/*** DEFAULT COLORS/STYLES ***/
+/* Global menu links */
+.dropdown-menu a,
+.dropdown-menu a:link,
+.dropdown-menu a:visited {
+    color: #000;
+    text-decoration: none;
+    padding: 5px 7px 5px 7px;
+}
+/* Global menu link hover */
+.dropdown-menu a:hover,
+.dropdown-menu li.dropdown-menu-hover > a {
+    text-decoration: none;
+}
+/* First-level menu items */
+.dropdown-menu li {
+    margin: 0 3px;
+    background: #c4c7c8;
+    float: left;
+}
+/* First-level menu item hover */
+.dropdown-menu li:hover, .dropdown-menu li.dropdown-menu-hover {
+    background: #e0e2e2;
+}
+/* 2nd+ level menu items */
+.dropdown-menu ul li {
+    background: #e0e2e2;
+}
+/* 2nd+ level menu item hover */
+.dropdown-menu ul li:hover, .dropdown-menu ul li.dropdown-menu-hover {
+    background: #c4c7c8;
+}
+
+/* Optional drop shadow */
+.dropdown-menu-shadow {
+    -webkit-box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    -moz-box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    -ms-box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    -o-box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+
+/*** ESSENTIAL STYLES ***/
+.dropdown-menu {
+    height: 100%;
+}
+.dropdown-menu:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.dropdown-menu ul {
+    z-index: 1000000;
+    position: absolute;
+    display: none;
+}
+.dropdown-menu,
+.dropdown-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.dropdown-menu ul ul {
+    top: 0;
+    left: 100%
+}
+.dropdown-menu li {
+    white-space: nowrap;
+}
+.dropdown-menu li a {
+    display: block;
+}
+.dropdown-menu ul li {
+    height: auto;
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none;
+}
+.dropdown-menu ul li a {
+    margin: 0 !important;
+}
+
+/* Optional submenu arrows -- uses image replacement */
+.dropdown-menu-sub-indicator {
+    position: relative;
+    left: 5px;
+    margin-right: 5px;
+    vertical-align: baseline;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    background-image: url('arrows-000000.png'); /* 8-bit indexed alpha png. IE6 gets solid image only */
+    background-repeat: no-repeat;
+    background-position: 0 -100px;
+    /* IE 6/7 hacks */
+    *text-indent: -9999px;
+    *vertical-align: middle;
+}
+.dropdown-menu-sub-indicator:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+}
+/* Arrow hovers */
+.dropdown-menu li:hover > a > .dropdown-menu-sub-indicator,
+.dropdown-menu li.dropdown-menu-hover > a > .dropdown-menu-sub-indicator {
+    background-position: -10px -100px;
+}
+/* Point arrows to the right for anchors in subs */
+.dropdown-menu ul .dropdown-menu-sub-indicator {
+    background-position: 0 0;
+}
+.dropdown-menu ul li:hover > a > .dropdown-menu-sub-indicator,
+.dropdown-menu ul li.dropdown-menu-hover > a > .dropdown-menu-sub-indicator {
+    background-position: -10px 0;
+}
+
+/* Vertical-style menu */
+.dropdown-menu-vertical li {
+    float: none;
+    position: relative;
+    /* IE7 Fix */
+    vertical-align: bottom;
+    height: 100%;
+}
+/* Recommended to specify width instead and set float:none; */
+.dropdown-menu-vertical {
+    float: left;
+    zoom: 1;
+}
+.dropdown-menu-vertical .dropdown-menu-sub-indicator {
+    background-position: 0 0;
+}
+.dropdown-menu-vertical li:hover > a > .dropdown-menu-sub-indicator,
+.dropdown-menu-vertical li.dropdown-menu-hover > a > .dropdown-menu-sub-indicator {
+    background-position: -10px 0; /* arrow hovers for modern browsers*/
+}

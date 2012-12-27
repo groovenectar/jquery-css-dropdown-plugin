@@ -1,0 +1,449 @@
+<!doctype html>
+<html class="no-js" lang="en-US">
+<head>
+<meta charset="utf-8">
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<![endif]-->
+<title>Barebones, Simple, jQuery + CSS Dropdown Menu</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<link rel="stylesheet" href="dropdown-menu.css" />
+<link rel="stylesheet" href="dropdown-menu-skin.css" />
+
+<script type="text/javascript" src="lib/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="dropdown-menu.js"></script>
+
+<style type="text/css">
+body {font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Helvetica,sans-serif;font-size:.9em;padding-bottom:300px;}
+a, a:visited {color:#e00;}
+code {color:#2821FF;font-family:"Lucida Console",monospace;}
+.example {margin-bottom:20px;}
+
+#example4 .dropdown-menu {
+    width: 260px;
+    float: none;
+}
+</style>
+
+<script type="text/javascript">
+$(function() {
+    $('#example1 .dropdown-menu').dropdown_menu();
+    $('#example2 .dropdown-menu').dropdown_menu({
+        sub_indicator_class  : 'dropdown-menu-sub-indicator',
+        vertical_class       : 'dropdown-menu-vertical',
+        shadow_class         : 'dropdown-menu-shadow',
+        hover_class          : 'dropdown-menu-hover',
+        delay                : 200,
+        animation            : { opacity : 'show' },
+        speed                : 'fast',
+        sub_indicators       : false,
+        drop_shadows         : false,
+        vertical             : false
+    });
+    $('#example3 .dropdown-menu').dropdown_menu();
+    $('#example4 .dropdown-menu').dropdown_menu({
+        sub_indicators : true,
+        drop_shadows : true,
+        vertical : true
+    });
+    $('#example5 .dropdown-menu').dropdown_menu({
+        sub_indicators : true,
+        drop_shadows : true,
+        close_delay : 500
+    });
+});
+</script>
+</head>
+
+<body>
+
+<h1>Barebones, Simple, Styleable jQuery + CSS Dropdown Menu</h1>
+
+<h2>Features</h2>
+
+<ul>
+    <li>Clean, minimalist design, ready to be styled. Ease of use and styling are the goals.</li>
+    <li>Timers on open/close of submenus to reduce accidental menu operations</li>
+    <li>Option for either horizontal or vertical menu</li>
+    <li>Functioning in tests with Chrome, Firefox, Safari, and Internet Exporer >= 7</li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>Include the jQuery library, <code>dropdown-menu.js</code> and <code>dropdown-menu.css</code> on the page:</p>
+
+<pre><code>&lt;link rel="stylesheet" href="dropdown-menu-skin.css" /&gt;
+&lt;script type="text/javascript" src="lib/jquery-1.8.3.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="dropdown-menu.js"&gt;&lt;/script&gt;</code></pre>
+
+<p>Use a standard UL/LI menu with anchors:</p>
+
+<pre><code>&lt;ul class="dropdown-menu"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="#"&gt;Item 2&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Submenu Item&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>Apply the <code>dropdown_menu()</code> function in a Document Ready section:</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+$(function() {
+    $('.dropdown-menu').dropdown_menu();
+});
+&lt;/script&gt;</code></pre>
+
+<p>See <a href="#example3">Example 3</a> and <a href="dropdown-menu-skin.css">dropdown-menu-skin.css</a> for styling hints.</p>
+
+<p>See <a href="#example2" onclick="$('#example2').find('pre:hidden').slideDown();">Example 2 source code</a> for complete configuration options.</p>
+
+<h2>Demonstrations</h2>
+
+<div class="example" id="example1">
+
+    <h3>Example 1 - Default Configuration</h3>
+
+    <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
+
+<pre style="display:none;"><code>&lt;script type="text/javascript"&gt;
+$(function() {
+    $('#example1 .dropdown-menu').dropdown_menu();
+});
+&lt;/script&gt;</code></pre>
+
+    <ul class="dropdown-menu">
+        <li><a href="#" onclick="return false;">Lorem Ipsum Dolor Sit</a></li>
+        <li>
+            <a href="#" onclick="return false;">Menu Item With Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li>
+                            <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                            <ul>
+                                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Voluptate Velit Esse</a></li>
+        <li>
+            <a href="#" onclick="return false;">Another Item with Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item With Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                        <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Officia Deserunt Mollit</a></li>
+                <li><a href="#" onclick="return false;">Eu Fugiat Nulla</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Occaecat Cupidatat</a></li>
+    </ul>
+
+</div>
+
+<div class="example" id="example2">
+
+    <h3>Example 2 - All Options Specified (To Their Defaults)</h3>
+
+    <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
+
+<pre style="display:none;"><code>&lt;script type="text/javascript"&gt;
+$(function() {
+    $('#example2 .dropdown-menu').dropdown_menu({
+        sub_indicator_class  : 'dropdown-menu-sub-indicator',   // Class to specify arrows for submenus
+        vertical_class       : 'dropdown-menu-vertical',        // Class for a vertical menu
+        shadow_class         : 'dropdown-menu-shadow',          // Class for drop shadow on submenus
+        hover_class          : 'dropdown-menu-hover',           // Class applied to hovered LI's
+        open_delay           : 200,                             // Delay on menu open
+        close_delay          : 300,                             // Delay on menu close
+        animation            : { opacity : 'show' },            // Animation for menu open
+        speed                : 'fast',                          // Animation speed for menu open
+        sub_indicators       : false,                           // Whether to show arrows for submenus
+        drop_shadows         : false,                           // Whether to apply drop shadow class to submenus
+        vertical             : false                            // Whether the root menu is vertically aligned
+    });
+&lt;/script&gt;</code></pre>
+
+    <ul class="dropdown-menu">
+        <li><a href="#" onclick="return false;">Lorem Ipsum Dolor Sit</a></li>
+        <li>
+            <a href="#" onclick="return false;">Menu Item With Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li>
+                            <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                            <ul>
+                                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Voluptate Velit Esse</a></li>
+        <li>
+            <a href="#" onclick="return false;">Another Item with Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item With Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                        <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Officia Deserunt Mollit</a></li>
+                <li><a href="#" onclick="return false;">Eu Fugiat Nulla</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Occaecat Cupidatat</a></li>
+    </ul>
+
+</div>
+
+<div class="example" id="example3">
+
+    <h3>Example 3 - Specify Options With HTML5 Data Attribute</h3>
+
+    <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
+
+<pre style="display:none;"><code>&lt;script type="text/javascript"&gt;
+$(function() {
+    $('#example3 .dropdown-menu').dropdown_menu();
+});
+&lt;/script&gt;
+
+&lt;ul class="dropdown-menu" data-options='{"sub_indicators":"true","drop_shadow":"true"}'&gt;
+[...]
+&lt;/ul&gt;</code></pre>
+
+    <ul class="dropdown-menu" data-options='{"sub_indicators":"true","drop_shadow":"true"}'>
+        <li><a href="#" onclick="return false;">Lorem Ipsum Dolor Sit</a></li>
+        <li>
+            <a href="#" onclick="return false;">Menu Item With Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li>
+                            <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                            <ul>
+                                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Voluptate Velit Esse</a></li>
+        <li>
+            <a href="#" onclick="return false;">Another Item with Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item With Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                        <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Officia Deserunt Mollit</a></li>
+                <li><a href="#" onclick="return false;">Eu Fugiat Nulla</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Occaecat Cupidatat</a></li>
+    </ul>
+
+</div>
+
+<div class="example" id="example4">
+
+    <h3>Example 4 - Vertical Style Menu With Shadows and Arrows</h3>
+
+    <p>For vertical menus, specifying the root menu's width is recommended, as well as setting its <code>float</code> value to <code>none</code>.</p>
+
+    <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
+
+<pre style="display:none;"><code>&lt;script type="text/javascript"&gt;
+$(function() {
+    $('#example4 .dropdown-menu').dropdown_menu({
+        sub_indicators : true,
+        vertical : true
+    });
+});
+&lt;/script&gt;
+
+&lt;style type="text/css"&gt;
+#example4 .dropdown-menu {
+    width: 260px;
+    float: none;
+}
+&lt;/style&gt;</code></pre>
+
+    <ul class="dropdown-menu">
+        <li><a href="#" onclick="return false;">Lorem Ipsum Dolor Sit</a></li>
+        <li>
+            <a href="#" onclick="return false;">Menu Item With Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li>
+                            <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                            <ul>
+                                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Voluptate Velit Esse</a></li>
+        <li>
+            <a href="#" onclick="return false;">Another Item with Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item With Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                        <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Officia Deserunt Mollit</a></li>
+                <li><a href="#" onclick="return false;">Eu Fugiat Nulla</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Occaecat Cupidatat</a></li>
+    </ul>
+
+</div>
+
+<div class="example" id="example5">
+
+    <h3>Example 5 - Custom CSS3 Skin and Increased Menu Close Delay</h3>
+
+    <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
+
+<pre style="display:none;"><code>&lt;link rel="stylesheet" href="dropdown-menu-skin.css" /&gt;
+
+&lt;script type="text/javascript"&gt;
+$(function() {
+    $('#example5 .dropdown-menu').dropdown_menu({
+        sub_indicators : true,
+        drop_shadows : true,
+        close_delay : 500
+    });});
+&lt;/script&gt;
+
+&lt;ul class="dropdown-menu dropdown-menu-skin"&gt;
+[...]
+&lt;/ul&gt;</code></pre>
+
+    <ul class="dropdown-menu dropdown-menu-skin">
+        <li><a href="#" onclick="return false;">Lorem Ipsum Dolor Sit</a></li>
+        <li>
+            <a href="#" onclick="return false;">Menu Item With Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li>
+                            <a href="#" onclick="return false;">Submenu Item with Submenu</a>
+                            <ul>
+                                <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                                <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Voluptate Velit Esse</a></li>
+        <li>
+            <a href="#" onclick="return false;">Another Item with Submenu</a>
+            <ul>
+                <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                <li>
+                    <a href="#" onclick="return false;">Submenu Item With Submenu</a>
+                    <ul>
+                        <li><a href="#" onclick="return false;">Excepteur Sint Occaecat</a></li>
+                        <li><a href="#" onclick="return false;">Dolore Eu Fugiat</a></li>
+                        <li><a href="#" onclick="return false;">Sunt In Culpa Qui</a></li>
+                        <li><a href="#" onclick="return false;">Cillum Dolore</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="return false;">Officia Deserunt Mollit</a></li>
+                <li><a href="#" onclick="return false;">Eu Fugiat Nulla</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="return false;">Occaecat Cupidatat</a></li>
+    </ul>
+
+</div>
+
+
+</body>
+</html>
