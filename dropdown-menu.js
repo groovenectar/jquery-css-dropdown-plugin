@@ -1,3 +1,5 @@
+// jQuery().dropdown_menu() by Daniel Upshaw 2012-2013
+
 // Beginning semi-colon for concatenated scripts and any improperly closed plugins
 ;(function( $, window, document, undefined ) {
     $.fn.extend({
