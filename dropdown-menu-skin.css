@@ -18,7 +18,7 @@
     box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     padding: 5px 10px 5px 10px;
     display: inline-block;
-    /* IE7 Fix */
+    /* IE7 Fixes */
     *display: inline;
     *zoom: 1;
 }
@@ -121,7 +121,7 @@
 }
 /* Submenu arrow indicator */
 .dropdown-menu-skin span.dropdown-menu-sub-indicator {
-    background-image: url('arrows-ffffff.png'); /* 8-bit indexed alpha png. IE6 gets solid image only */
+    background-image: url('arrows-ffffff.png');
 }
 /* Submenu drop shadow */
 .dropdown-menu-skin .dropdown-menu-shadow {
