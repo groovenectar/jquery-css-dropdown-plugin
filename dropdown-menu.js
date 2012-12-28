@@ -1,4 +1,8 @@
 // jQuery().dropdown_menu() by Daniel Upshaw 2012-2013
+// http://danielupshaw.com/jquery-css-dropdown-plugin/readme.html
+
+// Functionality from Brandon Aaron's bgiframe plugin directly implemented to accomodate for IE7 quirks:
+// http://brandonaaron.net/code/bgiframe/docs
 
 // Beginning semi-colon for concatenated scripts and any improperly closed plugins
 ;(function( $, window, document, undefined ) {
