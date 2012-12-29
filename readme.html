@@ -147,12 +147,18 @@ $(function() {
 
     <p>Use a standard UL/LI menu with anchors:</p>
 
-<pre><code>&lt;ul class="dropdown-menu"&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+<pre><code>&lt;ul class=&quot;dropdown-menu&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Item 1&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;
-        &lt;a href="#"&gt;Item 2&lt;/a&gt;
+        &lt;a href=&quot;#&quot;&gt;Item 2&lt;/a&gt;
         &lt;ul&gt;
-            &lt;li&gt;&lt;a href="#"&gt;Submenu Item&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href=&quot;#&quot;&gt;Submenu Item&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 1&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 2&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
         &lt;/ul&gt;
     &lt;/li&gt;
 &lt;/ul&gt;</code></pre>
@@ -179,19 +185,34 @@ $(function() {
 
     <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
 
-<pre style="display:none;"><code>&lt;link rel="stylesheet" href="dropdown-menu-skin.css" /&gt;
+<pre style="display:none;"><code>&lt;link rel="stylesheet" href="dropdown-menu.css" /&gt;
+&lt;link rel="stylesheet" href="dropdown-menu-skin.css" /&gt;
+&lt;script type="text/javascript" src="lib/jquery-1.8.3.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="dropdown-menu.js"&gt;&lt;/script&gt;
 
 &lt;script type="text/javascript"&gt;
 $(function() {
-    $('#example1 .dropdown-menu').dropdown_menu({
+    $('#example1').dropdown_menu({
         sub_indicators : true,
         drop_shadows : true,
         close_delay : 500
     });});
 &lt;/script&gt;
 
-&lt;ul class="dropdown-menu dropdown-menu-skin"&gt;
-[...]
+&lt;ul id="example1" class="dropdown-menu dropdown-menu-skin"&gt;
+    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;Item 2&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href=&quot;#&quot;&gt;Submenu Item&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 1&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 2&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 
     <ul class="dropdown-menu dropdown-menu-skin">
@@ -249,9 +270,13 @@ $(function() {
 
     <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
 
-<pre style="display:none;"><code>&lt;script type="text/javascript"&gt;
+<pre style="display:none;"><code>&lt;link rel="stylesheet" href="dropdown-menu.css" /&gt;
+&lt;script type="text/javascript" src="lib/jquery-1.8.3.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="dropdown-menu.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
 $(function() {
-    $('#example2 .dropdown-menu').dropdown_menu({
+    $('#example2').dropdown_menu({
         sub_indicator_class  : 'dropdown-menu-sub-indicator',   // Class given to LI's with submenus
         vertical_class       : 'dropdown-menu-vertical',        // Class for a vertical menu
         shadow_class         : 'dropdown-menu-shadow',          // Class for drop shadow on submenus
@@ -267,7 +292,23 @@ $(function() {
         vertical             : false,                           // Whether the root menu is vertically aligned
         init                 : function() {}                    // Callback function applied on init
     });
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+
+&lt;ul id="example2" class="dropdown-menu"&gt;
+    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;Item 2&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href=&quot;#&quot;&gt;Submenu Item&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 1&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 2&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
 
     <ul class="dropdown-menu">
         <li><a href="#" onclick="return false;">Lorem Ipsom Dolor</a></li>
@@ -326,14 +367,30 @@ $(function() {
 
     <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
 
-<pre style="display:none;"><code>&lt;script type="text/javascript"&gt;
+<pre style="display:none;"><code>&lt;link rel="stylesheet" href="dropdown-menu.css" /&gt;
+&lt;script type="text/javascript" src="lib/jquery-1.8.3.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="dropdown-menu.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
 $(function() {
-    $('#example3 .dropdown-menu').dropdown_menu();
+    $('#example3').dropdown_menu();
 });
 &lt;/script&gt;
 
-&lt;ul class="dropdown-menu" data-options='{"sub_indicators":"true","drop_shadows":"true"}'&gt;
-[...]
+&lt;ul id="example3" class="dropdown-menu" data-options='{"sub_indicators":"true","drop_shadows":"true"}'&gt;
+    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;Item 2&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href=&quot;#&quot;&gt;Submenu Item&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 1&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 2&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
 &lt;/ul&gt;</code></pre>
 
     <ul class="dropdown-menu" data-options='{"sub_indicators":"true","drop_shadows":"true"}'>
@@ -393,9 +450,13 @@ $(function() {
 
     <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
 
-<pre style="display:none;"><code>&lt;script type="text/javascript"&gt;
+<pre style="display:none;"><code>&lt;link rel="stylesheet" href="dropdown-menu.css" /&gt;
+&lt;script type="text/javascript" src="lib/jquery-1.8.3.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="dropdown-menu.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
 $(function() {
-    $('#example4 .dropdown-menu').dropdown_menu({
+    $('#example4').dropdown_menu({
         sub_indicators : true,
         vertical : true
     });
@@ -403,11 +464,26 @@ $(function() {
 &lt;/script&gt;
 
 &lt;style type="text/css"&gt;
-#example4 .dropdown-menu {
-    width: 260px;
-    float: none;
+#example4 {
+    width: 250px;
 }
-&lt;/style&gt;</code></pre>
+&lt;/style&gt;
+
+&lt;ul id="example4" class="dropdown-menu"&gt;
+    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;Item 2&lt;/a&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href=&quot;#&quot;&gt;Submenu Item&lt;/a&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 1&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Submenu Item 2&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
 
     <ul class="dropdown-menu">
         <li><a href="#" onclick="return false;">Lorem Ipsom Dolor</a></li>
