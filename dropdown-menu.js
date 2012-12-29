@@ -15,14 +15,16 @@
                 hover_class          : 'dropdown-menu-hover',
                 open_delay           : 200,
                 close_delay          : 300,
-                animation            : { opacity : 'show' },
-                speed                : 'fast',
+                animation_open       : { opacity : 'show' },
+                speed_open           : 'fast',
+                animation_close      : { opacity : 'hide' },
+                speed_close          : 'fast',
                 sub_indicators       : false,
                 drop_shadows         : false,
                 vertical             : false
             };
 
-            var ieLT7    = ($.browser.msie && $.browser.version < 8);
+            var ie7      = ($.browser.msie && $.browser.version < 8);
             var bgiframe = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="javascript:false;"'+
                            'style="display:block;position:absolute;z-index:-1;'+
                            'filter:Alpha(Opacity=\'0\');'+
@@ -45,52 +47,83 @@
                     elm.addClass(o.vertical_class);
                 }
 
-                elm.find('li:has(ul)').on({
-                    mouseenter : function(e) {
-                        clearTimeout($(this).data('close_timer'));
-                        clearTimeout($(this).data('open_timer'));
+                // Remove whitespace between inline-block elements
+                $('>li', elm).css({ 'font-size' : elm.css('font-size') });
+                elm.css({ 'font-size' : '0' });
 
-                        // $.proxy() keeps "this" context
-                        $(this).data('open_timer', setTimeout($.proxy(function() {
-                            $(this).addClass(o.hover_class);
-
-                            var submenu = $(this).find('>ul').css({ 'visibility' : 'visible' });
-                            if (o.vertical) {
-                                submenu.css({ 'top' : 0 , 'left' : $(this).width()});
-                            }
-
-                            submenu.stop();
-                            submenu.animate(o.animation, o.speed);
-                        }, this), o.open_delay));
-                    },
-                    mouseleave : function(e) {
-                        clearTimeout($(this).data('close_timer'));
-                        clearTimeout($(this).data('open_timer'));
-
-                        // $.proxy() keeps "this" context
-                        $(this).data('close_timer', setTimeout($.proxy(function() {
-                            $(this).removeClass(o.hover_class).find('>ul').hide().css({ 'visibility' : 'hidden' });
-                        }, this), o.close_delay));
-                    }
-                }).each(function() {
+                elm.find('li:has(ul)').each(function() {
                     // Add a class to the LI to indicate that it has a submenu
                     $(this).addClass(o.sub_indicator_class);
-                    // Add sub indicators if enabled
+
+                    // Add arrow/indicator element if enabled
                     if (o.sub_indicators) {
                         $('>a:first-child', this).append(sub_indicator.clone());
                     }
+
+                    // Get submenus and hide them, but keep display:block so if necessary the width can be calculated
+                    var submenu = $('>ul', this).css({ 'visibility' : 'hidden' , 'display' : 'block' });
+
                     // Add drop shadow class if enabled
                     if (o.drop_shadows) {
-                        $('>ul', this).addClass(o.shadow_class);
+                        submenu.addClass(o.shadow_class);
                     }
-                    // Add bgiframe for <= IE7 to reliably fix z-indexing issues
-                    if (ieLT7) {
-                        $('>ul', this).each(function() {
-                            if ($(this).children('iframe.bgiframe').length === 0) {
-                                this.insertBefore(document.createElement(bgiframe), this.firstChild);
-                            }
-                        });
+
+                    // For vertical menus
+                    if (o.vertical) {
+                        var left = $(this).width();
+                        submenu.css({ 'top' : 0 , 'left' : left });
                     }
+
+                    // IE <= 7 workarounds
+                    if (ie7) {
+                        // Lock submenu UL width in CSS so that the LI's can stretch
+                        // Wrap in setTimeout() else the arrow may not be included
+                        setTimeout(function() {
+                            submenu.css({ 'width' : submenu.innerWidth() });
+                        }, 0);
+
+                        // Add bgiframe for <= IE7 to reliably fix z-indexing issues
+                        if (submenu.children('iframe.bgiframe').length === 0) {
+                            submenu.insertBefore(document.createElement(bgiframe), submenu.firstChild);
+                        }
+                    }
+
+                    // Handle hover states
+                    $(this).on({
+                        mouseenter : function(e) {
+                            clearTimeout($(this).data('close_timer'));
+                            clearTimeout($(this).data('open_timer'));
+
+                            // $.proxy() keeps "this" context
+                            $(this).data('open_timer', setTimeout($.proxy(function() {
+                                $(this).addClass(o.hover_class);
+
+                                submenu.css({ 'visibility' : 'visible' });
+
+                                if (o.animation_open) {
+                                    submenu.stop();
+                                    submenu.animate(o.animation_open, o.speed_open);
+                                } else {
+                                    submenu.show();
+                                }
+                            }, this), o.open_delay));
+                        },
+                        mouseleave : function(e) {
+                            clearTimeout($(this).data('close_timer'));
+                            clearTimeout($(this).data('open_timer'));
+
+                            $(this).data('close_timer', setTimeout($.proxy(function() {
+                                $(this).removeClass(o.hover_class);
+
+                                if (o.animation_close) {
+                                    submenu.stop();
+                                    submenu.animate(o.animation_close, o.speed_close);
+                                } else {
+                                    submenu.hide().css({ 'visibility' : 'hidden' });
+                                }
+                            }, this), o.close_delay));
+                        }
+                    });
                 });
             });
         }

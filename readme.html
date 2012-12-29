@@ -16,7 +16,7 @@
 
 <style type="text/css">
 /* Styles specific to this page */
-body {font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Helvetica,sans-serif;font-size:.9em;padding-bottom:300px;}
+body {font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Helvetica,sans-serif;font-size:14px;padding-bottom:300px;}
 a, a:visited {color:#e00;}
 a:hover {color:#f00;}
 code {color:#2821FF;font-family:"Lucida Console",monospace;}
@@ -28,8 +28,7 @@ img, input {vertical-align:text-bottom;}
 
 /* Menu styles */
 #example4 .dropdown-menu {
-    width: 260px;
-    float: none;
+    width: 250px;
 }
 </style>
 
@@ -45,9 +44,12 @@ $(function() {
         vertical_class       : 'dropdown-menu-vertical',
         shadow_class         : 'dropdown-menu-shadow',
         hover_class          : 'dropdown-menu-hover',
-        delay                : 200,
-        animation            : { opacity : 'show' },
-        speed                : 'fast',
+        open_delay           : 150,
+        close_delay          : 300,
+        animation_open       : { opacity : 'show' },
+        speed_open           : 'fast',
+        animation_close      : { opacity : 'hide' },
+        speed_close          : 'fast',
         sub_indicators       : false,
         drop_shadows         : false,
         vertical             : false
@@ -253,10 +255,12 @@ $(function() {
         vertical_class       : 'dropdown-menu-vertical',        // Class for a vertical menu
         shadow_class         : 'dropdown-menu-shadow',          // Class for drop shadow on submenus
         hover_class          : 'dropdown-menu-hover',           // Class applied to hovered LI's
-        open_delay           : 200,                             // Delay on menu open
+        open_delay           : 150,                             // Delay on menu open
         close_delay          : 300,                             // Delay on menu close
-        animation            : { opacity : 'show' },            // Animation for menu open
-        speed                : 'fast',                          // Animation speed for menu open
+        animation_open       : { opacity : 'show' },            // Animation for menu open
+        speed_open           : 'fast',                          // Animation speed for menu open
+        animation_close      : { opacity : 'hide' },            // Animation for menu close
+        speed_close          : 'fast',                          // Animation speed for menu close
         sub_indicators       : false,                           // Whether to show arrows for submenus
         drop_shadows         : false,                           // Whether to apply drop shadow class to submenus
         vertical             : false                            // Whether the root menu is vertically aligned
@@ -383,7 +387,7 @@ $(function() {
 
     <h3>Example 4 - Vertical Style Menu With Shadows and Arrows</h3>
 
-    <p>For vertical menus, specifying the root menu's width is recommended, as well as setting its <code>float</code> value to <code>none</code>.</p>
+    <p>For vertical menus, the root menu's width must be specified. Default in stylesheet is 250px.</p>
 
     <p><a href="#" onclick="$(this).parent('p').next('pre').slideToggle();return false;">Toggle Source</a></p>
 
