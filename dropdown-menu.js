@@ -24,7 +24,8 @@
                 vertical             : false
             };
 
-            var ie7      = ($.browser.msie && $.browser.version < 8);
+            // Test for IE <= 7
+            var ie7 = ($.browser.msie && $.browser.version < 8);
 
             return this.each(function() {
                 var elm        = $(this);
@@ -53,7 +54,7 @@
                         $('>a:first-child', this).append(sub_indicator.clone());
                     }
 
-                    // Get submenus and hide them, but keep display:block so if necessary the width can be calculated
+                    // Get the submenu and hide it, but keep display:block so if necessary the width can be calculated
                     var submenu = $('>ul', this).css({ 'visibility' : 'hidden' , 'display' : 'block' });
 
                     // Add drop shadow class if enabled
@@ -89,7 +90,6 @@
                                 submenu.css({ 'visibility' : 'visible' });
 
                                 if (o.animation_open) {
-                                    submenu.stop();
                                     submenu.animate(o.animation_open, o.speed_open);
                                 } else {
                                     submenu.show();
@@ -104,7 +104,6 @@
                                 $(this).removeClass(o.hover_class);
 
                                 if (o.animation_close) {
-                                    submenu.stop();
                                     submenu.animate(o.animation_close, o.speed_close);
                                 } else {
                                     submenu.hide().css({ 'visibility' : 'hidden' });
