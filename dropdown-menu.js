@@ -114,7 +114,7 @@
                 // Wrap in setTimeout() to ensure processes have completed
                 setTimeout(function() {
                     // Completely hide the submenus
-                    $('ul', menu).hide()
+                    $('ul', menu).hide(1)
                     .promise()
                     .done(function() {
                         // Apply the init callback
