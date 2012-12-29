@@ -18,17 +18,18 @@
                 speed_close          : 'fast',
                 sub_indicators       : false,
                 drop_shadows         : false,
-                vertical             : false
+                vertical             : false,
+                init                 : function() {}
             };
 
             // Test for IE <= 7
             var ie7 = ($.browser.msie && $.browser.version < 8);
 
             return this.each(function() {
-                var elm      = $(this);
+                var menu     = $(this);
                 // Needs this single/double quote precedence for JSON data
                 // <div data-options='{"sub_indicators":"true"}'></div>
-                var metadata = elm.data('options');
+                var metadata = menu.data('options');
                 var o        = $.extend({}, _defaults, options, metadata);
 
                 // Arrow element
@@ -36,14 +37,14 @@
 
                 // Add vertical menu class
                 if (o.vertical) {
-                    elm.addClass(o.vertical_class);
+                    menu.addClass(o.vertical_class);
                 }
 
                 // Remove whitespace between inline-block elements
-                $('>li', elm).css({ 'font-size' : elm.css('font-size') });
-                elm.css({ 'font-size' : '0' });
+                $('>li', menu).css({ 'font-size' : menu.css('font-size') });
+                menu.css({ 'font-size' : '0' });
 
-                elm.find('li:has(ul)').each(function() {
+                menu.find('li:has(ul)').each(function() {
                     // Add a class to the LI to indicate that it has a submenu
                     $(this).addClass(o.sub_indicator_class);
 
@@ -108,11 +109,19 @@
                             }, this), o.close_delay));
                         }
                     });
-                });
+                })
 
-                // Completely hide the submenus
-                $('ul', elm).hide();
+                // Wrap in setTimeout() to ensure processes have completed
+                setTimeout(function() {
+                    // Completely hide the submenus
+                    $('ul', menu).hide()
+                    .promise()
+                    .done(function() {
+                        // Apply the init callback
+                        o.init.call(menu[0]);
+                    });
+                }, 0);
             });
-        }
+        }   
     });
 })( jQuery, window , document );

@@ -52,7 +52,8 @@ $(function() {
         speed_close          : 'fast',
         sub_indicators       : false,
         drop_shadows         : false,
-        vertical             : false
+        vertical             : false,
+        init                 : function() { alert(this) }
     });
     $('#example3 .dropdown-menu').dropdown_menu();
     $('#example4 .dropdown-menu').dropdown_menu({
@@ -263,7 +264,8 @@ $(function() {
         speed_close          : 'fast',                          // Animation speed for menu close
         sub_indicators       : false,                           // Whether to show arrows for submenus
         drop_shadows         : false,                           // Whether to apply drop shadow class to submenus
-        vertical             : false                            // Whether the root menu is vertically aligned
+        vertical             : false,                           // Whether the root menu is vertically aligned
+        init                 : function() {}                    // Callback function applied on init
     });
 &lt;/script&gt;</code></pre>
 
