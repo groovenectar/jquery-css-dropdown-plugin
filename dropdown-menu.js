@@ -13,7 +13,7 @@
                 vertical_class       : 'dropdown-menu-vertical',
                 shadow_class         : 'dropdown-menu-shadow',
                 hover_class          : 'dropdown-menu-hover',
-                open_delay           : 200,
+                open_delay           : 150,
                 close_delay          : 300,
                 animation_open       : { opacity : 'show' },
                 speed_open           : 'fast',
@@ -25,13 +25,6 @@
             };
 
             var ie7      = ($.browser.msie && $.browser.version < 8);
-            var bgiframe = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="javascript:false;"'+
-                           'style="display:block;position:absolute;z-index:-1;'+
-                           'filter:Alpha(Opacity=\'0\');'+
-                           'top:expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+\'px\');'+
-                           'left:expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+\'px\');'+
-                           'width:expression(this.parentNode.offsetWidth+\'px\');'+
-                           'height:expression(this.parentNode.offsetHeight+\'px\');"/>';
 
             return this.each(function() {
                 var elm        = $(this);
@@ -74,18 +67,13 @@
                         submenu.css({ 'top' : 0 , 'left' : left });
                     }
 
-                    // IE <= 7 workarounds
+                    // IE <= 7
                     if (ie7) {
                         // Lock submenu UL width in CSS so that the LI's can stretch
                         // Wrap in setTimeout() else the arrow may not be included
                         setTimeout(function() {
                             submenu.css({ 'width' : submenu.innerWidth() });
                         }, 0);
-
-                        // Add bgiframe for <= IE7 to reliably fix z-indexing issues
-                        if (submenu.children('iframe.bgiframe').length === 0) {
-                            submenu.insertBefore(document.createElement(bgiframe), submenu.firstChild);
-                        }
                     }
 
                     // Handle hover states
