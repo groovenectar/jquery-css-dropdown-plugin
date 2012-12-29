@@ -25,15 +25,16 @@
             var ie7 = ($.browser.msie && $.browser.version < 8);
 
             return this.each(function() {
-                var elm        = $(this);
+                var elm      = $(this);
                 // Needs this single/double quote precedence for JSON data
                 // <div data-options='{"sub_indicators":"true"}'></div>
-                var metadata   = elm.data('options');
-                var o          = $.extend({}, _defaults, options, metadata);
+                var metadata = elm.data('options');
+                var o        = $.extend({}, _defaults, options, metadata);
 
-                // *********** //
+                // Arrow element
                 var sub_indicator = $('<span class="' + o.sub_indicator_class + '">&#187;</span>');
 
+                // Add vertical menu class
                 if (o.vertical) {
                     elm.addClass(o.vertical_class);
                 }
@@ -51,8 +52,8 @@
                         $('>a:first-child', this).append(sub_indicator.clone());
                     }
 
-                    // Get the submenu and hide it, but keep display:block so if necessary the width can be calculated
-                    var submenu = $('>ul', this).css({ 'visibility' : 'hidden' , 'display' : 'block' });
+                    // Get the submenu and hide it, but keep display:block so the width can be calculated
+                    var submenu = $('>ul', this).css({ 'visibility' : 'hidden', 'display' : 'block' });
 
                     // Add drop shadow class if enabled
                     if (o.drop_shadows) {
@@ -61,8 +62,7 @@
 
                     // For vertical menus
                     if (o.vertical) {
-                        var left = $(this).width();
-                        submenu.css({ 'top' : 0 , 'left' : left });
+                        submenu.css({ 'top' : 0 , 'left' : $(this).width() });
                     }
 
                     // IE <= 7
@@ -70,7 +70,7 @@
                         // Lock submenu UL width in CSS so that the LI's can stretch
                         // Wrap in setTimeout() else the arrow may not be included
                         setTimeout(function() {
-                            submenu.css({ 'width' : submenu.innerWidth() });
+                            submenu.css({ 'width' : submenu.width() });
                         }, 0);
                     }
 
@@ -109,6 +109,9 @@
                         }
                     });
                 });
+
+                // Completely hide the submenus
+                $('ul', elm).hide();
             });
         }
     });

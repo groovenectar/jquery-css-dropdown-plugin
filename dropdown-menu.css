@@ -3,7 +3,7 @@
 .dropdown-menu {
     background: #c4c7c8;
 }
-/* Global menu links */
+/* Root links */
 .dropdown-menu a,
 .dropdown-menu a:link,
 .dropdown-menu a:visited {
@@ -11,7 +11,7 @@
     color: #393939;
     padding: 5px 9px;
 }
-/* Global menu link hover */
+/* Root link hover */
 .dropdown-menu a:hover,
 .dropdown-menu li.dropdown-menu-hover > a {
     color: #000;
