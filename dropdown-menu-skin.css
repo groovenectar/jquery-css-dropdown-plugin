@@ -22,6 +22,10 @@
 .dropdown-menu-skin ul {
     background: #63A8E0;
     border: 1px solid #111;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
     margin-left: -1px;
     margin-top: 5px;
 }
