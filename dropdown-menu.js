@@ -17,7 +17,7 @@
                 animation_close      : { opacity : 'hide' },            // Animation for menu close
                 speed_close          : 'fast',                          // Animation speed for menu close
                 sub_indicators       : false,                           // Whether to show arrows for submenus
-                drop_shadows         : false,                           // Whether to apply drop shadow class to submenus
+                drop_shadows         : false,                            // Whether to apply drop shadow class to submenus
                 vertical             : false,                           // Whether the root menu is vertically aligned
                 viewport_overflow    : 'auto',                          // Handle submenu opening offscreen: "auto", "move", "scroll", or false
                 init                 : function() {}                    // Callback function applied on init
@@ -114,12 +114,12 @@
                                             break;
                                         case 'scroll' :
                                             if (overflow_x) {
-                                                scrollLeft = submenu.offset().left - $(window).width() + submenu.width() + padding;
+                                                var scrollLeft = submenu.offset().left - $(window).width() + submenu.width() + padding;
                                                 $('html').animate({ scrollLeft : scrollLeft }, 'fast');
                                                 //$(window).scrollLeft(scrollLeft);
                                             }
                                             if (overflow_y) {
-                                                scrollTop = submenu.offset().top - $(window).height() + submenu.height() + padding;
+                                                var scrollTop = submenu.offset().top - $(window).height() + submenu.height() + padding;
                                                 $('html').animate({ scrollTop : scrollTop }, 'fast');
                                                 //$(window).scrollTop(scrollTop);
                                             }
