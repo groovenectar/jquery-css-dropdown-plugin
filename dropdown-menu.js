@@ -25,13 +25,6 @@
 
             // Test for IE <= 7
             var ie7 = ($.browser.msie && $.browser.version < 8);
-            var bgiframe = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="javascript:false;"'+
-                           'style="display:block;position:absolute;z-index:-1;'+
-                           'filter:Alpha(Opacity=\'0\');'+
-                           'top:expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+\'px\');'+
-                           'left:expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+\'px\');'+
-                           'width:expression(this.parentNode.offsetWidth+\'px\');'+
-                           'height:expression(this.parentNode.offsetHeight+\'px\');"/>';
 
             return this.each(function() {
                 var menu     = $(this);
@@ -75,10 +68,6 @@
                         setTimeout(function() {
                             // Lock submenu UL width in CSS so that the LI's can stretch
                             submenu.css({ 'width' : submenu.width() });
-                            // Apply bgiframe
-                            if (submenu.children('iframe.bgiframe').length === 0) {
-                                submenu[0].insertBefore(document.createElement(bgiframe), submenu[0].firstChild);
-                            }
                         }, 0);
                     }
 
