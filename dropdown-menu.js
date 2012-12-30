@@ -29,7 +29,7 @@
             return this.each(function() {
                 var menu     = $(this);
                 // Needs this single/double quote precedence for JSON data
-                // <div data-options='{"sub_indicators":"true"}'></div>
+                // <ul data-options='{"sub_indicators":"true"}'></ul>
                 var metadata = menu.data('options');
                 var o        = $.extend({}, _defaults, options, metadata);
 
