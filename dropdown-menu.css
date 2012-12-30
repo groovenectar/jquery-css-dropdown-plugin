@@ -55,12 +55,12 @@
     list-style: none;
 }
 .dropdown-menu ul {
-    z-index: 1000000;
     position: absolute;
+    z-index: 1000000;
 }
 .dropdown-menu ul ul {
     top: 0;
-    left: 100%
+    left: 100%;
 }
 .dropdown-menu li {
     margin: 0;
@@ -75,8 +75,8 @@
     display: block;
 }
 .dropdown-menu ul li {
-    display: block;
     position: relative;
+    display: block;
 }
 
 /* Optional submenu arrows */

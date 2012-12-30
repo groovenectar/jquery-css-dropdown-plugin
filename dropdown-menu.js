@@ -6,24 +6,32 @@
     $.fn.extend({
         dropdown_menu : function (options) {
             var _defaults = {
-                sub_indicator_class  : 'dropdown-menu-sub-indicator',
-                vertical_class       : 'dropdown-menu-vertical',
-                shadow_class         : 'dropdown-menu-shadow',
-                hover_class          : 'dropdown-menu-hover',
-                open_delay           : 150,
-                close_delay          : 300,
-                animation_open       : { opacity : 'show' },
-                speed_open           : 'fast',
-                animation_close      : { opacity : 'hide' },
-                speed_close          : 'fast',
-                sub_indicators       : false,
-                drop_shadows         : false,
-                vertical             : false,
-                init                 : function() {}
+                sub_indicator_class  : 'dropdown-menu-sub-indicator',   // Class given to LI's with submenus
+                vertical_class       : 'dropdown-menu-vertical',        // Class for a vertical menu
+                shadow_class         : 'dropdown-menu-shadow',          // Class for drop shadow on submenus
+                hover_class          : 'dropdown-menu-hover',           // Class applied to hovered LI's
+                open_delay           : 150,                             // Delay on menu open
+                close_delay          : 300,                             // Delay on menu close
+                animation_open       : { opacity : 'show' },            // Animation for menu open
+                speed_open           : 'fast',                          // Animation speed for menu open
+                animation_close      : { opacity : 'hide' },            // Animation for menu close
+                speed_close          : 'fast',                          // Animation speed for menu close
+                sub_indicators       : false,                           // Whether to show arrows for submenus
+                drop_shadows         : false,                           // Whether to apply drop shadow class to submenus
+                vertical             : false,                           // Whether the root menu is vertically aligned
+                viewport_overflow    : 'auto',                          // Handle submenu opening offscreen: "auto", "move", "scroll", or false
+                init                 : function() {}                    // Callback function applied on init
             };
 
             // Test for IE <= 7
             var ie7 = ($.browser.msie && $.browser.version < 8);
+            var bgiframe = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="javascript:false;"'+
+                           'style="display:block;position:absolute;z-index:-1;'+
+                           'filter:Alpha(Opacity=\'0\');'+
+                           'top:expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+\'px\');'+
+                           'left:expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+\'px\');'+
+                           'width:expression(this.parentNode.offsetWidth+\'px\');'+
+                           'height:expression(this.parentNode.offsetHeight+\'px\');"/>';
 
             return this.each(function() {
                 var menu     = $(this);
@@ -61,17 +69,16 @@
                         submenu.addClass(o.shadow_class);
                     }
 
-                    // For vertical menus
-                    if (o.vertical) {
-                        submenu.css({ 'top' : 0 , 'left' : $(this).width() });
-                    }
-
                     // IE <= 7
                     if (ie7) {
-                        // Lock submenu UL width in CSS so that the LI's can stretch
                         // Wrap in setTimeout() else the arrow may not be included
                         setTimeout(function() {
+                            // Lock submenu UL width in CSS so that the LI's can stretch
                             submenu.css({ 'width' : submenu.width() });
+                            // Apply bgiframe
+                            if (submenu.children('iframe.bgiframe').length === 0) {
+                                submenu[0].insertBefore(document.createElement(bgiframe), submenu[0].firstChild);
+                            }
                         }, 0);
                     }
 
@@ -85,10 +92,61 @@
                             $(this).data('open_timer', setTimeout($.proxy(function() {
                                 $(this).addClass(o.hover_class);
 
+                                // For vertical menus
+                                if (o.vertical) {
+                                    submenu.css({ 'top' : 0 , 'left' : $(this).width() });
+                                } else {
+                                    submenu.css({ 'top' : '', 'left' : '' });
+                                }
+
                                 submenu.css({ 'visibility' : 'visible' });
 
                                 if (o.animation_open) {
-                                    submenu.animate(o.animation_open, o.speed_open);
+                                    submenu.animate(o.animation_open, o.speed_open, function() {
+                                        if (!o.viewport_overflow) {
+                                            return;
+                                        }
+
+                                        // Check if the submenu is overflowing off the page
+                                        overflow_x = submenu.offset().left + submenu.width() > $(window).scrollLeft() + $(window).width();
+                                        overflow_y = submenu.offset().top + submenu.height() > $(window).scrollTop() + $(window).height();
+                                        overflow   = overflow_x || overflow_y;
+
+                                        if (overflow) {
+                                            if (o.viewport_overflow === 'auto') o.viewport_overflow = ie7 ? 'scroll' : 'move';
+
+                                            // Set some padding (accomodate for drop shadows, etc)
+                                            var padding = 10;
+
+                                            switch (o.viewport_overflow) {
+                                                case 'move' :
+                                                    // Ensure the animation will start at the current offset;
+                                                    submenu.offset(submenu.offset());
+
+                                                    var move = {};
+                                                    if (overflow_x) move.left = '-=' + ((submenu.offset().left + submenu.width()) - ($(window).scrollLeft() + $(window).width()) + padding);
+                                                    if (overflow_y) move.top  = '-=' + ((submenu.offset().top + submenu.height()) - ($(window).scrollTop() + $(window).height()) + padding);
+
+                                                    submenu.animate(move , 'fast');
+                                                    //var left = overflow_x ? ($(window).scrollLeft() + $(window).width()) - submenu.width() - padding : submenu.offset().left;
+                                                    //var top  = overflow_y ? ($(window).scrollTop() + $(window).height()) - submenu.height() - padding : submenu.offset().top;
+                                                    //submenu.offset({ left : left , top : top });
+                                                    break;
+                                                case 'scroll' :
+                                                    if (overflow_x) {
+                                                        scrollLeft = submenu.offset().left - $(window).width() + submenu.width() + padding;
+                                                        $('html').animate({ scrollLeft : scrollLeft }, 'fast');
+                                                        //$(window).scrollLeft(scrollLeft);
+                                                    }
+                                                    if (overflow_y) {
+                                                        scrollTop = submenu.offset().top - $(window).height() + submenu.height() + padding;
+                                                        $('html').animate({ scrollTop : scrollTop }, 'fast');
+                                                        //$(window).scrollTop(scrollTop);
+                                                    }
+                                                    break;
+                                            }
+                                        }
+                                    });
                                 } else {
                                     submenu.show();
                                 }
@@ -102,7 +160,9 @@
                                 $(this).removeClass(o.hover_class);
 
                                 if (o.animation_close) {
-                                    submenu.animate(o.animation_close, o.speed_close);
+                                    submenu.animate(o.animation_close, o.speed_close, function() {
+                                        submenu.css({ 'visibility' : 'hidden' });
+                                    });
                                 } else {
                                     submenu.hide().css({ 'visibility' : 'hidden' });
                                 }
