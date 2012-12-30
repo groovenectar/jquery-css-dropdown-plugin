@@ -40,20 +40,21 @@ $(function() {
         close_delay : 500
     });
     $('#example2 .dropdown-menu').dropdown_menu({
-        sub_indicator_class  : 'dropdown-menu-sub-indicator',
-        vertical_class       : 'dropdown-menu-vertical',
-        shadow_class         : 'dropdown-menu-shadow',
-        hover_class          : 'dropdown-menu-hover',
-        open_delay           : 150,
-        close_delay          : 300,
-        animation_open       : { opacity : 'show' },
-        speed_open           : 'fast',
-        animation_close      : { opacity : 'hide' },
-        speed_close          : 'fast',
-        sub_indicators       : false,
-        drop_shadows         : false,
-        vertical             : false,
-        init                 : function() {}
+        sub_indicator_class  : 'dropdown-menu-sub-indicator',   // Class given to LI's with submenus
+        vertical_class       : 'dropdown-menu-vertical',        // Class for a vertical menu
+        shadow_class         : 'dropdown-menu-shadow',          // Class for drop shadow on submenus
+        hover_class          : 'dropdown-menu-hover',           // Class applied to hovered LI's
+        open_delay           : 150,                             // Delay on menu open
+        close_delay          : 300,                             // Delay on menu close
+        animation_open       : { opacity : 'show' },            // Animation for menu open
+        speed_open           : 'fast',                          // Animation speed for menu open
+        animation_close      : { opacity : 'hide' },            // Animation for menu close
+        speed_close          : 'fast',                          // Animation speed for menu close
+        sub_indicators       : false,                           // Whether to show arrows for submenus
+        drop_shadows         : false,                           // Whether to apply drop shadow class to submenus
+        vertical             : false,                           // Whether the root menu is vertically aligned
+        viewport_overflow    : 'auto',                          // Handle submenu opening offscreen: "auto", "move", "scroll", or false
+        init                 : function() {}                    // Callback function applied on init
     });
     $('#example3 .dropdown-menu').dropdown_menu();
     $('#example4 .dropdown-menu').dropdown_menu({
@@ -290,6 +291,7 @@ $(function() {
         sub_indicators       : false,                           // Whether to show arrows for submenus
         drop_shadows         : false,                           // Whether to apply drop shadow class to submenus
         vertical             : false,                           // Whether the root menu is vertically aligned
+        viewport_overflow    : 'auto',                          // Handle submenu opening offscreen: "auto", "move", "scroll", or false
         init                 : function() {}                    // Callback function applied on init
     });
 &lt;/script&gt;

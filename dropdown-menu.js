@@ -88,6 +88,11 @@
                             clearTimeout($(this).data('close_timer'));
                             clearTimeout($(this).data('open_timer'));
 
+                            // If the submenu has already been opened
+                            if ($(this).hasClass(o.hover_class)) {
+                                return
+                            }
+
                             // $.proxy() keeps "this" context
                             $(this).data('open_timer', setTimeout($.proxy(function() {
                                 $(this).addClass(o.hover_class);
@@ -99,54 +104,45 @@
                                     submenu.css({ 'top' : '', 'left' : '' });
                                 }
 
-                                submenu.css({ 'visibility' : 'visible' });
+                                // So we can check the offset
+                                submenu.css({ 'visibility' : 'hidden', 'display' : 'block' });
+
+                                // Check if the submenu is overflowing off the page
+                                overflow_x = submenu.offset().left + submenu.width() > $(window).scrollLeft() + $(window).width();
+                                overflow_y = submenu.offset().top + submenu.height() > $(window).scrollTop() + $(window).height();
+                                overflow   = overflow_x || overflow_y;
+
+                                if (overflow && o.viewport_overflow) {
+                                    // Padding to accomodate for drop shadows, etc
+                                    var padding = 10;
+                                    if (o.viewport_overflow === 'auto') o.viewport_overflow = ie7 ? 'scroll' : 'move';
+
+                                    switch (o.viewport_overflow) {
+                                        case 'move' :
+                                            var left = overflow_x ? ($(window).scrollLeft() + $(window).width()) - submenu.width() - padding : submenu.offset().left;
+                                            var top  = overflow_y ? ($(window).scrollTop() + $(window).height()) - submenu.height() - padding : submenu.offset().top;
+                                            submenu.offset({ left : left , top : top });
+                                            break;
+                                        case 'scroll' :
+                                            if (overflow_x) {
+                                                scrollLeft = submenu.offset().left - $(window).width() + submenu.width() + padding;
+                                                $('html').animate({ scrollLeft : scrollLeft }, 'fast');
+                                                //$(window).scrollLeft(scrollLeft);
+                                            }
+                                            if (overflow_y) {
+                                                scrollTop = submenu.offset().top - $(window).height() + submenu.height() + padding;
+                                                $('html').animate({ scrollTop : scrollTop }, 'fast');
+                                                //$(window).scrollTop(scrollTop);
+                                            }
+                                            break;
+                                    }
+                                }
+
+                                // Restore display state
+                                submenu.hide().css({ 'visibility' : 'visible' });
 
                                 if (o.animation_open) {
-                                    submenu.animate(o.animation_open, o.speed_open, function() {
-                                        if (!o.viewport_overflow) {
-                                            return;
-                                        }
-
-                                        // Check if the submenu is overflowing off the page
-                                        overflow_x = submenu.offset().left + submenu.width() > $(window).scrollLeft() + $(window).width();
-                                        overflow_y = submenu.offset().top + submenu.height() > $(window).scrollTop() + $(window).height();
-                                        overflow   = overflow_x || overflow_y;
-
-                                        if (overflow) {
-                                            if (o.viewport_overflow === 'auto') o.viewport_overflow = ie7 ? 'scroll' : 'move';
-
-                                            // Set some padding (accomodate for drop shadows, etc)
-                                            var padding = 10;
-
-                                            switch (o.viewport_overflow) {
-                                                case 'move' :
-                                                    // Ensure the animation will start at the current offset;
-                                                    submenu.offset(submenu.offset());
-
-                                                    var move = {};
-                                                    if (overflow_x) move.left = '-=' + ((submenu.offset().left + submenu.width()) - ($(window).scrollLeft() + $(window).width()) + padding);
-                                                    if (overflow_y) move.top  = '-=' + ((submenu.offset().top + submenu.height()) - ($(window).scrollTop() + $(window).height()) + padding);
-
-                                                    submenu.animate(move , 'fast');
-                                                    //var left = overflow_x ? ($(window).scrollLeft() + $(window).width()) - submenu.width() - padding : submenu.offset().left;
-                                                    //var top  = overflow_y ? ($(window).scrollTop() + $(window).height()) - submenu.height() - padding : submenu.offset().top;
-                                                    //submenu.offset({ left : left , top : top });
-                                                    break;
-                                                case 'scroll' :
-                                                    if (overflow_x) {
-                                                        scrollLeft = submenu.offset().left - $(window).width() + submenu.width() + padding;
-                                                        $('html').animate({ scrollLeft : scrollLeft }, 'fast');
-                                                        //$(window).scrollLeft(scrollLeft);
-                                                    }
-                                                    if (overflow_y) {
-                                                        scrollTop = submenu.offset().top - $(window).height() + submenu.height() + padding;
-                                                        $('html').animate({ scrollTop : scrollTop }, 'fast');
-                                                        //$(window).scrollTop(scrollTop);
-                                                    }
-                                                    break;
-                                            }
-                                        }
-                                    });
+                                    submenu.animate(o.animation_open, o.speed_open);
                                 } else {
                                     submenu.show();
                                 }
