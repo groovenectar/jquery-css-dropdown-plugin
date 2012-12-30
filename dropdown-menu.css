@@ -55,6 +55,7 @@
     list-style: none;
 }
 .dropdown-menu ul {
+    display: none;
     position: absolute;
     z-index: 1000000;
 }
