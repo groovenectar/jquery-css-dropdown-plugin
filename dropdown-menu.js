@@ -79,7 +79,7 @@
 
                             // If the submenu has already been opened
                             if ($(this).hasClass(o.hover_class)) {
-                                return
+                                return;
                             }
 
                             // $.proxy() keeps "this" context
@@ -154,7 +154,7 @@
                             }, this), o.close_delay));
                         }
                     });
-                })
+                });
 
                 // Wrap in setTimeout() to ensure processes have completed
                 setTimeout(function() {
@@ -167,6 +167,6 @@
                     });
                 }, 0);
             });
-        }   
+        }
     });
 })( jQuery, window , document );
