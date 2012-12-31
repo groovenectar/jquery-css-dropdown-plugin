@@ -152,6 +152,16 @@
                                     submenu.hide().css({ 'visibility' : 'hidden' });
                                 }
                             }, this), o.close_delay));
+                        },
+                        // For touch devices, disable the link if its submenu is not showing yet
+                        touchstart : function(e) {
+                            $('>a:first-child', this).one('click', $.proxy(function(e) {
+                                if (!$(this).hasClass(o.hover_class)) {
+                                    e.preventDefault();
+                                } else {
+                                    return true;
+                                }
+                            }, this));
                         }
                     });
                 });
