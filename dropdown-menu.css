@@ -23,6 +23,7 @@
 }
 /* Submenus */
 .dropdown-menu ul {
+    border: 1px solid #c4c7c8;
     background: #e0e2e2;
 }
 /* Submenu item hover */
