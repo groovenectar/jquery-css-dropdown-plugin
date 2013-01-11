@@ -17,7 +17,7 @@
                 animation_close      : { opacity : 'hide' },            // Animation for menu close
                 speed_close          : 'fast',                          // Animation speed for menu close
                 sub_indicators       : false,                           // Whether to show arrows for submenus
-                drop_shadows         : false,                            // Whether to apply drop shadow class to submenus
+                drop_shadows         : false,                           // Whether to apply drop shadow class to submenus
                 vertical             : false,                           // Whether the root menu is vertically aligned
                 viewport_overflow    : 'auto',                          // Handle submenu opening offscreen: "auto", "move", "scroll", or false
                 init                 : function() {}                    // Callback function applied on init
@@ -102,7 +102,7 @@
                                 overflow   = overflow_x || overflow_y;
 
                                 if (overflow && o.viewport_overflow) {
-                                    // Padding to accomodate for drop shadows, etc
+                                    // Padding to accomodate for drop shgadows, etc
                                     var padding = 10;
                                     if (o.viewport_overflow === 'auto') o.viewport_overflow = ie7 ? 'scroll' : 'move';
 
