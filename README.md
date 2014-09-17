@@ -6,6 +6,3 @@ Lightweight, Simple, Styleable jQuery + CSS Dropdown Menu Plugin
 View the README and see demonstrations at the plugin homepage:
 
 http://danielupshaw.com/jquery-css-dropdown-plugin/readme.html
-
-This software is licensed under the MIT license. Please refer to
-the LICENSE file for more details.
